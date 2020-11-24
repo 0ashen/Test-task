@@ -1,0 +1,24 @@
+.usersTableWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    * {
+        outline: none;
+    }
+}
+.caption {
+    font-size: 12px;
+    padding-bottom: 10px;
+    display: block;
+}
+.paper {
+    height: 400px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.tableCell {
+
+}

@@ -1,0 +1,47 @@
+.navigation {
+    padding: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    padding: 15px 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    @media screen and (max-width: 600px) {
+        padding: 15px 10px;
+    }
+}
+.githubLink {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+    color:#fff;
+    svg {
+        width: 45px;
+        height: 45px;
+        margin-right: 20px;
+        margin-top: 20px;
+        path {
+            fill:#fff;
+        }
+    }
+    &:before {
+        content:'';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border: 100px solid transparent;
+        border-top-color:gray;
+        z-index: -1;
+        transform: translate(100px, -100px) rotate(-135deg);
+    }
+}
