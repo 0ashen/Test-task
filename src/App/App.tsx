@@ -1,50 +1,32 @@
 import React, { useState } from 'react'
 import styles from './App.module.scss'
-import { NavLink, Redirect, Route, Switch } from 'react-router-dom'
-import { Welcome } from '../pages/Welcome/Welcome'
-import { List } from '../pages/List/List'
-import { Button, ButtonGroup } from '@material-ui/core'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import { User } from '../api/api.interface'
+import { UsersArray } from '../api/api.interface'
+import { Navigation, Page, routes } from '../components/Navigation/Navigation'
 
 function AppComponent(): JSX.Element {
 
-    const [users, setUsers] = useState<User[]>([])
+    const [users, setUsers] = useState<UsersArray>([])
 
     return (
         <>
-            <nav className={styles.navigation}>
-                <ButtonGroup variant="contained">
-                    <Button
-                        component={NavLink}
-                        to={'/welcome'}
-                        variant="contained"
-                        activeClassName="MuiButton-containedPrimary"
-                    >
-                        welcome
-                    </Button>
-                    <Button
-                        component={NavLink}
-                        to={'/list'}
-                        activeClassName="MuiButton-containedPrimary"
-                        variant="contained">
-                        user list
-                    </Button>
-                </ButtonGroup>
-
-            </nav>
+            <Navigation />
             <main className={styles.main}>
                 <Switch>
-                    <Route exact path="/">
-                        <Redirect to="/welcome" />
+                    <Route exact
+                           path="/">
+                        <Redirect to={routes[0].url} />
                     </Route>
-                    <Route path="/welcome">
-                        <Welcome />
-                    </Route>
-                    <Route path="/list">
-                        <List users={users} setUsers={setUsers}/>
-                    </Route>
+                    {routes.map((page: Page) => {
+                        const ComponentPage = page.component
+                        return (
+                            <Route path={page.url}>
+                                <ComponentPage users={users} setUsers={setUsers} />
+                            </Route>
+                        )
+                    })}
                 </Switch>
             </main>
             <a className={styles.githubLink}

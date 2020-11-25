@@ -1,3 +1,5 @@
+import React from 'react'
+
 export enum UserKeys {
     id = 'id',
     first_name = 'first_name',
@@ -12,7 +14,9 @@ export interface User {
     readonly [UserKeys.group]: string,
 }
 
-interface Data extends User {
-    _repeat: 300,
-}
+export type UsersArray = User[];
 
+export interface UserProps {
+    users: UsersArray;
+    setUsers: React.Dispatch<React.SetStateAction<UsersArray>>;
+}
