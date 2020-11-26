@@ -1,4 +1,4 @@
-import { User, UserKeys } from '../../api/api.interface'
+import { EntityUser, EntityUserKeys } from '../../api/api.interface'
 import { TableHeaderProps } from 'react-virtualized'
 
 declare module '@material-ui/core/styles/withStyles' {
@@ -12,7 +12,7 @@ declare module '@material-ui/core/styles/withStyles' {
 }
 
 interface ColumnData {
-    dataKey: keyof User;
+    dataKey: keyof EntityUser;
     label: string;
     numeric?: boolean;
     width: number;
@@ -23,21 +23,21 @@ export interface MuiVirtualizedTableProps {
     headerHeight?: number;
     onRowClick?: () => void;
     rowCount: number;
-    rowGetter: (row: { index: number }) => User;
+    rowGetter: (row: { index: number }) => EntityUser;
     rowHeight?: number;
     sortUsers: SortUsers;
-    sortByField: UserKeys | null;
+    sortByField: EntityUserKeys | null;
     sortOrder: 'ASC' | 'DESC';
 }
 
-export type SortUsers = (sortByFiled: UserKeys) => void;
+export type SortUsers = (sortByFiled: EntityUserKeys) => void;
 
 export interface TableState {
-    users: User[];
-    sortByField: UserKeys | null;
+    users: EntityUser[];
+    sortByField: EntityUserKeys | null;
     sortOrder: 'ASC' | 'DESC';
 }
 
 export interface MyTableHeaderProps extends TableHeaderProps {
-    dataKey: UserKeys
+    dataKey: EntityUserKeys
 }

@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom'
 import './assets/styles/index.scss'
 import { App } from './App/App'
 import reportWebVitals from './reportWebVitals'
-import { Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { BrowserRouter } from 'react-router-dom'
 
-const customHistory = createBrowserHistory()
 ReactDOM.render(
     <React.StrictMode>
-        <Router history={customHistory}>
+        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task-Benovate.ru' : '/'}>
             <App />
-        </Router>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root'),
 )

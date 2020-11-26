@@ -1,22 +1,16 @@
 import React, { useEffect } from 'react'
-import { api_getUsers, API_URL_SPARE } from '../api/queries'
+import { apiGetUsers, GET_USERS_URL_SPARE } from '../api/getUsers.api'
 import { CircularProgress } from '@material-ui/core'
-import { User } from '../api/api.interface'
 import { Table } from '../components/Table/Table'
+import { AppUserState } from '../App/App'
 
-export interface UsersListProps {
-    users: User[],
-    setUsers: React.Dispatch<React.SetStateAction<User[]>>
-}
-export type IUsersList = (props: UsersListProps) => JSX.Element
-
-export function UsersList(props: UsersListProps): JSX.Element {
+export function UsersList(props: AppUserState): JSX.Element {
 
     const { users, setUsers } = props
 
     const getUsers = async () => {
         if (!users.length) {
-            const { data } = await api_getUsers(API_URL_SPARE)
+            const { data } = await apiGetUsers(GET_USERS_URL_SPARE)
             setUsers(data)
         }
     }

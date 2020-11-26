@@ -2,7 +2,7 @@ import React from 'react'
 import { MuiVirtualizedTableProps, MyTableHeaderProps } from '../Table.interface'
 import { AutoSizer, Column, Table, TableHeaderProps, TableHeaderRowProps } from 'react-virtualized'
 import styles from '../Table.module.scss'
-import { UserKeys } from '../../../api/api.interface'
+import { EntityUserKeys } from '../../../api/api.interface'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import { TableRowProps } from 'react-virtualized/dist/es/Table'
 
@@ -20,9 +20,10 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
             </div>
         )
     }
-    private rowRenderer = ({ className, style, columns, index }: TableRowProps): JSX.Element => {
+    private rowRenderer = ({ className, style, columns, index, key }: TableRowProps): JSX.Element => {
         return (
             <div style={{ ...style, paddingRight: 0 }}
+                 key={key}
                  className={className + ' ' + (!(index % 2) ? styles.tableRowEven : '')}>
                 {columns}
             </div>
@@ -34,7 +35,7 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
             <>
                 <span>{label}</span>
                 {
-                    dataKey !== UserKeys.group ?
+                    dataKey !== EntityUserKeys.group ?
                         <ArrowDownwardIcon
                             className={
                                 (this.props.sortByField === dataKey ? styles.isActive : '') + ' ' +

@@ -3,12 +3,18 @@ import styles from './App.module.scss'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import { UsersArray } from '../api/api.interface'
-import { Navigation, Page, routes } from '../components/Navigation/Navigation'
+import { EntityUser } from '../api/api.interface'
+import { Navigation, routes } from '../components/Navigation/Navigation'
+import { EntityRoute } from '../components/Navigation/Navigation.interface'
+
+export interface AppUserState {
+    users: EntityUser[],
+    setUsers: React.Dispatch<React.SetStateAction<EntityUser[]>>
+}
 
 function AppComponent(): JSX.Element {
 
-    const [users, setUsers] = useState<UsersArray>([])
+    const [users, setUsers] = useState<EntityUser[]>([])
 
     return (
         <>
@@ -19,10 +25,10 @@ function AppComponent(): JSX.Element {
                            path="/">
                         <Redirect to={routes[0].url} />
                     </Route>
-                    {routes.map((page: Page) => {
+                    {routes.map((page: EntityRoute) => {
                         const ComponentPage = page.component
                         return (
-                            <Route path={page.url}>
+                            <Route path={page.url} key={page.url}>
                                 <ComponentPage users={users} setUsers={setUsers} />
                             </Route>
                         )

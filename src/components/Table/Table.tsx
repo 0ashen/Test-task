@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import Paper from '@material-ui/core/Paper'
 import { SortUsers, TableState } from './Table.interface'
-import { User, UserKeys, UserProps } from '../../api/api.interface'
+import { EntityUser, EntityUserKeys } from '../../api/api.interface'
 import styles from './Table.module.scss'
 import { MaterialUIVirtualizedTable } from './children/MaterialUiVirtualizedTable'
 import { Fab } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 
-function Table(props: UserProps) {
+function Table(props) {
 
     const [{ users, sortByField, sortOrder }, setUsers] = useState<TableState>(
         {
@@ -18,9 +18,9 @@ function Table(props: UserProps) {
         },
     )
 
-    const sortUsers: SortUsers = (sortByFieldProp: UserKeys) => {
+    const sortUsers: SortUsers = (sortByFieldProp: EntityUserKeys) => {
         const sortOrderProp = sortByFieldProp === sortByField && sortOrder === 'ASC' ? 'DESC' : 'ASC'
-        users.sort((a: User, b: User) => {
+        users.sort((a: EntityUser, b: EntityUser) => {
             if (a[sortByFieldProp] < b[sortByFieldProp]) {
                 return sortOrderProp === 'ASC' ? -1 : 1
             }
@@ -59,23 +59,23 @@ function Table(props: UserProps) {
                         {
                             width: 100,
                             label: 'ID',
-                            dataKey: UserKeys.id,
+                            dataKey: EntityUserKeys.id,
                             numeric: true,
                         },
                         {
                             width: 300,
                             label: 'Name',
-                            dataKey: UserKeys.first_name,
+                            dataKey: EntityUserKeys.first_name,
                         },
                         {
                             width: 500,
                             label: 'Last Name',
-                            dataKey: UserKeys.last_name,
+                            dataKey: EntityUserKeys.last_name,
                         },
                         {
                             width: 500,
                             label: 'Group',
-                            dataKey: UserKeys.group,
+                            dataKey: EntityUserKeys.group,
                         },
                     ]}
                 />

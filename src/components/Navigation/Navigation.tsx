@@ -3,29 +3,23 @@ import styles from '../../App/App.module.scss'
 import { Button, ButtonGroup } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import { Welcome } from '../../pages/Welcome'
-import { UsersList, UsersListProps } from '../../pages/UsersList'
+import { UsersList } from '../../pages/UsersList'
+import { EntityRoute } from './Navigation.interface'
 
-export enum PagesEnums {
+export enum Pages {
     welcome = '/welcome',
     'user list' = '/user-list'
 }
 
-export interface Page {
-    readonly text: string;
-    readonly url: PagesEnums;
-    readonly component: ((props: UsersListProps) => JSX.Element) | (() => JSX.Element);
-}
-
-
-export const routes: Page[] = [
+export const routes: EntityRoute[] = [
     {
         text: 'welcome',
-        url: PagesEnums.welcome,
+        url: Pages.welcome,
         component: Welcome,
     },
     {
         text: 'user list',
-        url: PagesEnums['user list'],
+        url: Pages['user list'],
         component: UsersList,
     },
 ]
@@ -34,12 +28,13 @@ export function Navigation(): JSX.Element {
     return (
         <nav className={styles.navigation}>
             <ButtonGroup variant="contained">
-                {routes.map((page: Page) => (
+                {routes.map((page: EntityRoute) => (
                     <Button
                         component={NavLink}
                         to={page.url}
                         variant="contained"
                         activeClassName="MuiButton-containedPrimary"
+                        key={page.url}
                     >
                         {page.text}
                     </Button>
