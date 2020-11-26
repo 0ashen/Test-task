@@ -1,4 +1,4 @@
-import React, { Props } from 'react'
+import React from 'react'
 import styles from '../../App/App.module.scss'
 import { Button, ButtonGroup } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
