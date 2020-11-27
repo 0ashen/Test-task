@@ -1,8 +1,9 @@
-import { UsersListProps } from '../../pages/UsersList'
 import { Pages } from './Navigation'
+import { AppUserState } from '../../App/App'
 
 export interface EntityRoute {
     readonly text: string;
     readonly url: Pages;
-    readonly component: ((props: UsersListProps) => JSX.Element) | (() => JSX.Element);
+    readonly component: ((props: AppUserState) => JSX.Element) | (() => JSX.Element);
 }
+

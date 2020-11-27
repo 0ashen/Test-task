@@ -3,7 +3,7 @@ import styles from '../../App/App.module.scss'
 import { Button, ButtonGroup } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
 import { Welcome } from '../../pages/Welcome'
-import { UsersList } from '../../pages/UsersList'
+import { UsersList } from '../../pages/UsersList/UsersList'
 import { EntityRoute } from './Navigation.interface'
 
 export enum Pages {

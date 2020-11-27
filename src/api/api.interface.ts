@@ -1,5 +1,3 @@
-import React from 'react'
-
 export enum EntityUserKeys {
     id = 'id',
     first_name = 'first_name',

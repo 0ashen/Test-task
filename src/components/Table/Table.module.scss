@@ -1,31 +1,5 @@
-.usersTableWrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-    * {
-        outline: none;
-    }
-}
 
-.headerCaption {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    padding-bottom: 15px;
-    i {
-        font-size: 12px;
-        display: block;
-        align-self: flex-end;
-        color: #949494;
-    }
-    b {
-        padding-left: 10px;
-    }
-}
 
 .paper {
     height: 400px;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { MuiVirtualizedTableProps, MyTableHeaderProps } from '../Table.interface'
+import { MuiVirtualizedTableProps, MyTableHeaderProps, SortOrderType } from '../Table.interface'
 import { AutoSizer, Column, Table, TableHeaderProps, TableHeaderRowProps } from 'react-virtualized'
 import styles from '../Table.module.scss'
 import { EntityUserKeys } from '../../../api/api.interface'
@@ -39,7 +39,7 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
                         <ArrowDownwardIcon
                             className={
                                 (this.props.sortByField === dataKey ? styles.isActive : '') + ' ' +
-                                ((this.props.sortOrder === 'DESC') && (this.props.sortByField === dataKey) ? styles.isRotate : '')
+                                ((this.props.sortOrder === SortOrderType.DESC) && (this.props.sortByField === dataKey) ? styles.isRotate : '')
                             }
                             onClick={() => this.props.sortUsers(dataKey)} />
                         : null
