@@ -5,11 +5,12 @@ import { withRouter } from 'react-router'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import { EntityUser } from '../api/api.interface'
 import { Navigation, routes } from '../components/Navigation/Navigation'
-import { EntityRoute } from '../components/Navigation/Navigation.interface'
+import { UsersList } from '../pages/UsersList/UsersList'
+import { Welcome } from '../pages/Welcome'
 
 function AppComponent(): JSX.Element {
 
-    const [users, setUsers] = useState<{data: EntityUser[]}>({ data: [] })
+    const [users, setUsers] = useState<{ data: EntityUser[] }>({ data: [] })
 
     return (
         <>
@@ -20,14 +21,12 @@ function AppComponent(): JSX.Element {
                            path="/">
                         <Redirect to={routes[0].url} />
                     </Route>
-                    {routes.map((page: EntityRoute) => {
-                        const ComponentPage = page.component
-                        return (
-                            <Route path={page.url} key={page.url}>
-                                <ComponentPage users={users} setUsers={setUsers} />
-                            </Route>
-                        )
-                    })}
+                    <Route path={routes[0].url} key={routes[0].url}>
+                        <Welcome />
+                    </Route>
+                    <Route path={routes[1].url} key={routes[1].url}>
+                        <UsersList users={users} setUsers={setUsers} />
+                    </Route>
                 </Switch>
             </main>
             <a className={styles.githubLink}

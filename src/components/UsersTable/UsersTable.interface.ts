@@ -22,7 +22,9 @@ export interface UsersTableState {
     sortOrder: SortTypes;
 }
 
-export interface UsersTableProps extends AppUserState {
+export interface UsersTableProps {
+    users: EntityUser[];
+    setUsers: AppUserState['setUsers'];
 }
 
 export type SortUsersHandler = (sortByFieldNext: UsersTableState['sortByField']) => void;

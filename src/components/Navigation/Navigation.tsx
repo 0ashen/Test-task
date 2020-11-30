@@ -15,12 +15,10 @@ export const routes: EntityRoute[] = [
     {
         text: 'welcome',
         url: Pages.welcome,
-        component: Welcome,
     },
     {
         text: 'user list',
         url: Pages['user list'],
-        component: UsersList,
     },
 ]
 

@@ -9,7 +9,7 @@ function UsersTable(props: UsersTableProps) {
 
     const [{ users, sortByField, sortOrder }, setUsers] = useState<UsersTableState>(
         {
-            users: props.users.data,
+            users: props.users,
             sortOrder: SortTypes.ASC,
             sortByField: 'id',
         },

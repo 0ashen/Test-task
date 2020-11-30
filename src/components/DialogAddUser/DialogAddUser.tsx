@@ -10,6 +10,7 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import { EntityUserGroups } from '../../api/api.interface'
 import { DialogAddUserProps } from './DialogAddUser.interface'
 import { AppUserState } from '../../App/App.interface'
+import { UsersListState } from '../../pages/UsersList/UserList.interface'
 
 export function DialogAddUser(props: DialogAddUserProps) {
 
@@ -24,9 +25,20 @@ export function DialogAddUser(props: DialogAddUserProps) {
         setName('')
         setLastName('')
     }
-    const handleCloseDialog = () => {
-        if (handleValidation.name && handleValidation.name) {
+    const handleCloseDialog = (checkValidation: boolean = false ) => () => {
+        if (!checkValidation) {
+            setOpen(false)
+            return;
+        }
+        if ( handleValidation().name && handleValidation().name) {
+
             props.setUsers((state: AppUserState['users']): AppUserState['users'] => {
+                console.log({
+                    id: state.data.length + 1,
+                    first_name: name,
+                    last_name: lastName,
+                    group: department || null,
+                })
                 state.data.unshift({
                     id: state.data.length + 1,
                     first_name: name,
@@ -36,6 +48,8 @@ export function DialogAddUser(props: DialogAddUserProps) {
                 return { data: state.data }
             })
             setOpen(false)
+            props.UsersListSetState((prevState: UsersListState): UsersListState =>
+                ({ viewByGroup: prevState.viewByGroup }))
         }
     }
 
@@ -67,7 +81,7 @@ export function DialogAddUser(props: DialogAddUserProps) {
             </Fab>
             <Dialog open={open}
                     fullWidth
-                    onClose={handleCloseDialog}
+                    onClose={handleCloseDialog()}
                     aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">
                     Add user
@@ -120,11 +134,11 @@ export function DialogAddUser(props: DialogAddUserProps) {
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseDialog}
+                    <Button onClick={handleCloseDialog()}
                             color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={handleCloseDialog}
+                    <Button onClick={handleCloseDialog(true)}
                             variant="contained"
                             color="primary">
                         Add

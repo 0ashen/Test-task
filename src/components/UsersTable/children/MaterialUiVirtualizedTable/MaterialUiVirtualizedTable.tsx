@@ -4,10 +4,10 @@ import styles from '../../UsersTable.module.scss'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import { TableRowProps } from 'react-virtualized/dist/es/Table'
 import { MuiVirtualizedTableProps } from './MaterialUiVirtualizedTable.interface'
-import { SortTypes, UsersTableState } from '../../UsersTable.interface'
+import { SortTypes } from '../../UsersTable.interface'
 import { EntityUser } from '../../../../api/api.interface'
 
-export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTableProps> {
+export class MaterialUIVirtualizedTable extends React.PureComponent<MuiVirtualizedTableProps> {
     static defaultProps = {
         headerHeight: 48,
         rowHeight: 35,
@@ -31,7 +31,7 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
         )
     }
     private headerCellRenderer = (props: TableHeaderProps): JSX.Element => {
-        const { label, dataKey } = props as {label: string; dataKey: keyof EntityUser}
+        const { label, dataKey } = props as { label: string; dataKey: keyof EntityUser }
         return (
             <>
                 <span>{label}</span>
@@ -51,9 +51,10 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
 
     render(): JSX.Element {
         const { columns, rowHeight, headerHeight, ...tableProps } = this.props
+
         return (
             <AutoSizer style={{ width: '100%' }}>
-                {({ height, width }: {height: number, width: number}): JSX.Element => (
+                {({ height, width }: { height: number, width: number }): JSX.Element => (
                     <Table
                         height={height}
                         width={width}
