@@ -1,10 +1,11 @@
 import React from 'react'
-import { MuiVirtualizedTableProps, MyTableHeaderProps, SortOrderType } from '../Table.interface'
 import { AutoSizer, Column, Table, TableHeaderProps, TableHeaderRowProps } from 'react-virtualized'
-import styles from '../Table.module.scss'
-import { EntityUserKeys } from '../../../api/api.interface'
+import styles from '../../UsersTable.module.scss'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import { TableRowProps } from 'react-virtualized/dist/es/Table'
+import { MuiVirtualizedTableProps } from './MaterialUiVirtualizedTable.interface'
+import { SortTypes, UsersTableState } from '../../UsersTable.interface'
+import { EntityUser } from '../../../../api/api.interface'
 
 export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTableProps> {
     static defaultProps = {
@@ -30,16 +31,16 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
         )
     }
     private headerCellRenderer = (props: TableHeaderProps): JSX.Element => {
-        const { label, dataKey, ...other } = props as MyTableHeaderProps
+        const { label, dataKey } = props as {label: string; dataKey: keyof EntityUser}
         return (
             <>
                 <span>{label}</span>
                 {
-                    dataKey !== EntityUserKeys.group ?
+                    dataKey !== 'group' ?
                         <ArrowDownwardIcon
                             className={
                                 (this.props.sortByField === dataKey ? styles.isActive : '') + ' ' +
-                                ((this.props.sortOrder === SortOrderType.DESC) && (this.props.sortByField === dataKey) ? styles.isRotate : '')
+                                ((this.props.sortOrder === SortTypes.DESC) && (this.props.sortByField === dataKey) ? styles.isRotate : '')
                             }
                             onClick={() => this.props.sortUsers(dataKey)} />
                         : null
@@ -48,12 +49,11 @@ export class MaterialUIVirtualizedTable extends React.Component<MuiVirtualizedTa
         )
     }
 
-
     render(): JSX.Element {
         const { columns, rowHeight, headerHeight, ...tableProps } = this.props
         return (
             <AutoSizer style={{ width: '100%' }}>
-                {({ height, width }) => (
+                {({ height, width }: {height: number, width: number}): JSX.Element => (
                     <Table
                         height={height}
                         width={width}

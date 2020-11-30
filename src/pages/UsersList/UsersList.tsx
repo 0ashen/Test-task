@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react'
 import { apiGetUsers, GET_USERS_URL_SPARE } from '../../api/getUsers.api'
-import { CircularProgress, Fab } from '@material-ui/core'
-import { Table } from '../../components/Table/Table'
-import { AppUserState } from '../../App/App'
+import { CircularProgress } from '@material-ui/core'
+import { UsersTable } from '../../components/UsersTable/UsersTable'
 import styles from './UsersList.module.scss'
-import PersonAddIcon from '@material-ui/icons/PersonAdd'
 import { DialogAddUser } from '../../components/DialogAddUser/DialogAddUser'
+import { AppUserState } from '../../App/App.interface'
 
 export function UsersList(props: AppUserState): JSX.Element {
 
     const { users, setUsers } = props
 
     const getUsers = async () => {
-        if (!users.length) {
+        if (!users.data.length) {
             const { data } = await apiGetUsers(GET_USERS_URL_SPARE)
-            setUsers(data)
+            setUsers({data: data})
         }
     }
 
@@ -22,7 +21,7 @@ export function UsersList(props: AppUserState): JSX.Element {
         getUsers()
     })
 
-    if (!(users.length)) {
+    if (!(users.data.length)) {
         return <CircularProgress />
     }
 
@@ -30,11 +29,11 @@ export function UsersList(props: AppUserState): JSX.Element {
         <div className={styles.usersListWrapper}>
             <div className={styles.headerCaption}>
                 <i>
-                    Count of items: {users.length}
+                    Count of items: {users.data.length}
                 </i>
-                <DialogAddUser />
+                <DialogAddUser {...props}/>
             </div>
-            <Table {...props} />
+            <UsersTable {...props} />
         </div>
     )
 }

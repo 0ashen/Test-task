@@ -1,21 +1,13 @@
-
-export enum EntityUserKeys {
-    id = 'id',
-    first_name = 'first_name',
-    last_name = 'last_name',
-    group = 'group',
+export interface EntityUser {
+    readonly id: number,
+    readonly first_name: string,
+    readonly last_name: string,
+    readonly group?: EntityUserGroups | null,
 }
 
 export enum EntityUserGroups {
-    'Development department',
-    'Management',
-    'Human Resources Department',
-    'Accounting department'
-}
-
-export interface EntityUser {
-    readonly [EntityUserKeys.id]: number,
-    readonly [EntityUserKeys.first_name]: string,
-    readonly [EntityUserKeys.last_name]: string,
-    readonly [EntityUserKeys.group]: EntityUserGroups | null,
+    'Development department' = 'Development department',
+    Management = 'Management',
+    'Human Resources Department' = 'Human Resources Department',
+    'Accounting department' = 'Accounting department'
 }

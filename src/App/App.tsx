@@ -7,14 +7,9 @@ import { EntityUser } from '../api/api.interface'
 import { Navigation, routes } from '../components/Navigation/Navigation'
 import { EntityRoute } from '../components/Navigation/Navigation.interface'
 
-export interface AppUserState {
-    users: EntityUser[],
-    setUsers: React.Dispatch<React.SetStateAction<EntityUser[]>>
-}
-
 function AppComponent(): JSX.Element {
 
-    const [users, setUsers] = useState<EntityUser[]>([])
+    const [users, setUsers] = useState<{data: EntityUser[]}>({ data: [] })
 
     return (
         <>
