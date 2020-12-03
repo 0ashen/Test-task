@@ -1,5 +1,5 @@
-import { EntityUser } from '../../api/api.interface'
-import { AppUserState } from '../../App/App.interface'
+import { EntityUser } from '../../api/apiEntity.interface'
+import { UserOverviewProps } from '../../pages/UsersOverview/UsersOverview.interface'
 
 declare module '@material-ui/core/styles/withStyles' {
     // Augment the BaseCSSProperties so that we can control jss-rtl
@@ -23,8 +23,7 @@ export interface UsersTableState {
 }
 
 export interface UsersTableProps {
-    users: EntityUser[];
-    setUsers: AppUserState['setUsers'];
+    usersList: EntityUser[]
 }
 
 export type SortUsersHandler = (sortByFieldNext: UsersTableState['sortByField']) => void;

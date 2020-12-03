@@ -11,6 +11,10 @@
     display: flex;
     align-items: center;
     padding-right: 0 !important;
+
+    @media screen and (max-width: 1000px) {
+        flex-direction: column;
+    }
 }
 
 .tableRowHeader {
@@ -30,15 +34,20 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    &:first-child {
-        flex-shrink: 0 !important;
-        flex: none !important;
-        width: 70px;
-        font-size: 12px;
-        line-height: 100%;
-        color: #606060;
-        padding-left: 10px;
+    @media screen and (max-width: 1000px) {
+        width: 100%;
+        line-height: 1 !important;
+    }
+    @media screen and (min-width: 1000px) {
+        &:first-child {
+            flex-shrink: 0 !important;
+            flex: none !important;
+            width: 70px;
+            font-size: 12px;
+            line-height: 100%;
+            color: #606060;
+            padding-left: 10px;
+        }
     }
 }
 

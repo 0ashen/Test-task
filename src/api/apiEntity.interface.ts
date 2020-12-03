@@ -6,8 +6,8 @@ export interface EntityUser {
 }
 
 export enum EntityUserGroups {
+    'Accounting department' = 'Accounting department',
     'Development department' = 'Development department',
-    Management = 'Management',
     'Human Resources Department' = 'Human Resources Department',
-    'Accounting department' = 'Accounting department'
+    Management = 'Management'
 }

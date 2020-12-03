@@ -2,23 +2,21 @@ import React from 'react'
 import styles from '../../App/App.module.scss'
 import { Button, ButtonGroup } from '@material-ui/core'
 import { NavLink } from 'react-router-dom'
-import { Welcome } from '../../pages/Welcome'
-import { UsersList } from '../../pages/UsersList/UsersList'
-import { EntityRoute } from './Navigation.interface'
+import { EntityRedirect, EntityRoute } from './Navigation.interface'
 
-export enum Pages {
-    welcome = '/welcome',
-    'user list' = '/user-list'
-}
-
-export const routes: EntityRoute[] = [
+export const routes: (EntityRedirect | EntityRoute)[] = [
     {
-        text: 'welcome',
-        url: Pages.welcome,
+        redirect: true,
+        from: '/',
+        to: '/welcome',
     },
     {
-        text: 'user list',
-        url: Pages['user list'],
+        label: 'welcome',
+        url: '/welcome',
+    },
+    {
+        label: 'user overview',
+        url: '/user-overview',
     },
 ]
 
@@ -26,17 +24,22 @@ export function Navigation(): JSX.Element {
     return (
         <nav className={styles.navigation}>
             <ButtonGroup variant="contained">
-                {routes.map((page: EntityRoute) => (
-                    <Button
-                        component={NavLink}
-                        to={page.url}
-                        variant="contained"
-                        activeClassName="MuiButton-containedPrimary"
-                        key={page.url}
-                    >
-                        {page.text}
-                    </Button>
-                ))}
+                {routes.map((route: EntityRedirect | EntityRoute) => {
+                    if ('redirect' in route) {
+                        return null
+                    }
+                    return (
+                        <Button
+                            component={NavLink}
+                            to={route.url}
+                            variant="contained"
+                            activeClassName="MuiButton-containedPrimary"
+                            key={route.url}
+                        >
+                            {route.label}
+                        </Button>
+                    )
+                })}
             </ButtonGroup>
         </nav>
     )

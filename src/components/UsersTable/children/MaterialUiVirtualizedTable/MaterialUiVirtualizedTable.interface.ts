@@ -1,4 +1,4 @@
-import { EntityUser } from '../../../../api/api.interface'
+import { EntityUser } from '../../../../api/apiEntity.interface'
 import { SortTypes, SortUsersHandler, UsersTableState } from '../../UsersTable.interface'
 
 export interface MuiVirtualizedTableProps {
@@ -7,6 +7,7 @@ export interface MuiVirtualizedTableProps {
         label: string;
         numeric?: boolean;
         width: number;
+        justDesktop?: boolean
     }[];
     headerHeight?: number;
     onRowClick?: () => void;

@@ -5,12 +5,12 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import { TableRowProps } from 'react-virtualized/dist/es/Table'
 import { MuiVirtualizedTableProps } from './MaterialUiVirtualizedTable.interface'
 import { SortTypes } from '../../UsersTable.interface'
-import { EntityUser } from '../../../../api/api.interface'
+import { EntityUser } from '../../../../api/apiEntity.interface'
 
 export class MaterialUIVirtualizedTable extends React.PureComponent<MuiVirtualizedTableProps> {
     static defaultProps = {
         headerHeight: 48,
-        rowHeight: 35,
+        rowHeight: window.innerWidth > 1000 ? 35 : 35 * 3,
     }
 
     private headerRowRenderer = ({ className, style, columns }: TableHeaderRowProps): JSX.Element => {
@@ -65,9 +65,11 @@ export class MaterialUIVirtualizedTable extends React.PureComponent<MuiVirtualiz
                         headerRowRenderer={this.headerRowRenderer}
                         headerStyle={{ lineHeight: headerHeight + 'px' }}
                         rowRenderer={this.rowRenderer}
+                        disableHeader={window.innerWidth < 1000}
                         {...tableProps}
                     >
-                        {columns.map(({ dataKey, ...other }, index) => {
+                        {columns.map(({ dataKey, justDesktop, ...other }, index) => {
+                            if (justDesktop && window.innerWidth < 1000) return null
                             return (
                                 <Column
                                     key={dataKey}

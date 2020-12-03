@@ -7,10 +7,10 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { Fab, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 import PersonAddIcon from '@material-ui/icons/PersonAdd'
-import { EntityUserGroups } from '../../api/api.interface'
+import { EntityUserGroups } from '../../api/apiEntity.interface'
 import { DialogAddUserProps } from './DialogAddUser.interface'
-import { AppUserState } from '../../App/App.interface'
-import { UsersListState } from '../../pages/UsersList/UserList.interface'
+import { AppState } from '../../App/App.interface'
+import { sortToSubArraysProcedure } from '../../pages/UsersOverview/UsersOverview'
 
 export function DialogAddUser(props: DialogAddUserProps) {
 
@@ -20,36 +20,49 @@ export function DialogAddUser(props: DialogAddUserProps) {
     const [lastName, setLastName] = React.useState<string>('')
 
     const handleOpenDialog = () => {
-        setOpen(true)
-        setDepartment('')
-        setName('')
-        setLastName('')
+        // setOpen(true)
+        // setDepartment('')
+        // setName('')
+        // setLastName('')
+
+        props.setUsersState((state: AppState): AppState => {
+            const newUsersList = [
+                {
+                    id: state.usersAll.length + 1,
+                    first_name: '1',
+                    last_name: '2',
+                    group: EntityUserGroups['Accounting department'],
+                },
+                ...state.usersAll,
+            ]
+            return {
+                ...state,
+                usersAll: newUsersList,
+                usersSortedByGroup: sortToSubArraysProcedure(newUsersList),
+            }
+        })
     }
-    const handleCloseDialog = (checkValidation: boolean = false ) => () => {
+    const handleCloseDialog = (checkValidation: boolean = false) => () => {
         if (!checkValidation) {
             setOpen(false)
-            return;
+            return
         }
-        if ( handleValidation().name && handleValidation().name) {
-
-            props.setUsers((state: AppUserState['users']): AppUserState['users'] => {
-                console.log({
-                    id: state.data.length + 1,
-                    first_name: name,
-                    last_name: lastName,
-                    group: department || null,
-                })
-                state.data.unshift({
-                    id: state.data.length + 1,
-                    first_name: name,
-                    last_name: lastName,
-                    group: department || null,
-                })
-                return { data: state.data }
-            })
+        if (handleValidation().name && handleValidation().name) {
+            props.setUsersState((state: AppState): AppState => (
+                {
+                    ...state,
+                    usersAll: [
+                        {
+                            id: state.usersAll.length + 1,
+                            first_name: name,
+                            last_name: lastName,
+                            group: department || null,
+                        },
+                        ...state.usersAll,
+                    ],
+                }
+            ))
             setOpen(false)
-            props.UsersListSetState((prevState: UsersListState): UsersListState =>
-                ({ viewByGroup: prevState.viewByGroup }))
         }
     }
 

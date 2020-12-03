@@ -3,14 +3,25 @@ import styles from './App.module.scss'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import GitHubIcon from '@material-ui/icons/GitHub'
-import { EntityUser } from '../api/api.interface'
+import { EntityUserGroups } from '../api/apiEntity.interface'
 import { Navigation, routes } from '../components/Navigation/Navigation'
-import { UsersList } from '../pages/UsersList/UsersList'
+import { UsersOverview } from '../pages/UsersOverview/UsersOverview'
 import { Welcome } from '../pages/Welcome'
+import { EntityRedirect, EntityRoute } from '../components/Navigation/Navigation.interface'
+import { AppState } from './App.interface'
 
 function AppComponent(): JSX.Element {
 
-    const [users, setUsers] = useState<{ data: EntityUser[] }>({ data: [] })
+    const [usersState, setUsersState] = useState<AppState>({
+        usersAll: [],
+        usersSortedByGroup: {
+            [EntityUserGroups['Accounting department']]: [],
+            [EntityUserGroups['Development department']]: [],
+            [EntityUserGroups['Human Resources Department']]: [],
+            [EntityUserGroups['Management']]: [],
+            withoutGroup: [],
+        },
+    })
 
     return (
         <>
@@ -18,14 +29,15 @@ function AppComponent(): JSX.Element {
             <main className={styles.main}>
                 <Switch>
                     <Route exact
-                           path="/">
-                        <Redirect to={routes[0].url} />
+                           path={(routes[0] as EntityRedirect).from}>
+                        <Redirect to={(routes[0] as EntityRedirect).to} />
                     </Route>
-                    <Route path={routes[0].url} key={routes[0].url}>
+                    <Route path={(routes[1] as EntityRoute).url}>
                         <Welcome />
                     </Route>
-                    <Route path={routes[1].url} key={routes[1].url}>
-                        <UsersList users={users} setUsers={setUsers} />
+                    <Route path={(routes[2] as EntityRoute).url}>
+                        <UsersOverview usersState={usersState}
+                                       setUsersState={setUsersState} />
                     </Route>
                 </Switch>
             </main>
