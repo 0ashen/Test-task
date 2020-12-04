@@ -20,27 +20,10 @@ export function DialogAddUser(props: DialogAddUserProps) {
     const [lastName, setLastName] = React.useState<string>('')
 
     const handleOpenDialog = () => {
-        // setOpen(true)
-        // setDepartment('')
-        // setName('')
-        // setLastName('')
-
-        props.setUsersState((state: AppState): AppState => {
-            const newUsersList = [
-                {
-                    id: state.usersAll.length + 1,
-                    first_name: '1',
-                    last_name: '2',
-                    group: EntityUserGroups['Accounting department'],
-                },
-                ...state.usersAll,
-            ]
-            return {
-                ...state,
-                usersAll: newUsersList,
-                usersSortedByGroup: sortToSubArraysProcedure(newUsersList),
-            }
-        })
+        setOpen(true)
+        setDepartment('')
+        setName('')
+        setLastName('')
     }
     const handleCloseDialog = (checkValidation: boolean = false) => () => {
         if (!checkValidation) {
@@ -48,20 +31,22 @@ export function DialogAddUser(props: DialogAddUserProps) {
             return
         }
         if (handleValidation().name && handleValidation().name) {
-            props.setUsersState((state: AppState): AppState => (
-                {
+            props.setUsersState((state: AppState): AppState => {
+                const newUsersList = [
+                    {
+                        id: state.usersAll.length + 1,
+                        first_name: name,
+                        last_name: lastName,
+                        group: department || null,
+                    },
+                    ...state.usersAll,
+                ]
+                return {
                     ...state,
-                    usersAll: [
-                        {
-                            id: state.usersAll.length + 1,
-                            first_name: name,
-                            last_name: lastName,
-                            group: department || null,
-                        },
-                        ...state.usersAll,
-                    ],
+                    usersAll: newUsersList,
+                    usersSortedByGroup: sortToSubArraysProcedure(newUsersList),
                 }
-            ))
+            })
             setOpen(false)
         }
     }

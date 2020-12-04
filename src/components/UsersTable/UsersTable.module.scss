@@ -37,7 +37,30 @@
     @media screen and (max-width: 1000px) {
         width: 100%;
         line-height: 1 !important;
+        height: 33.33% !important;
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 33.33% !important;
+        padding: 5px 5px;
+        display: flex;
+        align-items: center;
     }
+
+    &:not(.tableCellHeader) span:first-child {
+        color: #000000;
+        opacity: 0.5;
+        display: none;
+        font-size: 12px;
+        padding-bottom: 3px;
+        box-sizing: border-box;
+        width: 90px;
+
+        @media screen and (max-width: 1000px) {
+            display: block;
+        }
+    }
+
+
     @media screen and (min-width: 1000px) {
         &:first-child {
             flex-shrink: 0 !important;

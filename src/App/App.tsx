@@ -6,11 +6,11 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import { EntityUserGroups } from '../api/apiEntity.interface'
 import { Navigation, routes } from '../components/Navigation/Navigation'
 import { UsersOverview } from '../pages/UsersOverview/UsersOverview'
-import { Welcome } from '../pages/Welcome'
+import { Welcome } from '../pages/Welcome/Welcome'
 import { EntityRedirect, EntityRoute } from '../components/Navigation/Navigation.interface'
-import { AppState } from './App.interface'
+import { AppProps, AppState } from './App.interface'
 
-function AppComponent(): JSX.Element {
+function AppComponent(props: AppProps): JSX.Element {
 
     const [usersState, setUsersState] = useState<AppState>({
         usersAll: [],
@@ -30,7 +30,7 @@ function AppComponent(): JSX.Element {
                 <Switch>
                     <Route exact
                            path={(routes[0] as EntityRedirect).from}>
-                        <Redirect to={(routes[0] as EntityRedirect).to} />
+                        <Redirect to={ props.redirectTo || (routes[0] as EntityRedirect).to} />
                     </Route>
                     <Route path={(routes[1] as EntityRoute).url}>
                         <Welcome />

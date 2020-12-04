@@ -10,7 +10,7 @@ import { EntityUser } from '../../../../api/apiEntity.interface'
 export class MaterialUIVirtualizedTable extends React.PureComponent<MuiVirtualizedTableProps> {
     static defaultProps = {
         headerHeight: 48,
-        rowHeight: window.innerWidth > 1000 ? 35 : 35 * 3,
+        rowHeight: window.innerWidth > 1000 ? 35 : 80,
     }
 
     private headerRowRenderer = ({ className, style, columns }: TableHeaderRowProps): JSX.Element => {
@@ -68,17 +68,18 @@ export class MaterialUIVirtualizedTable extends React.PureComponent<MuiVirtualiz
                         disableHeader={window.innerWidth < 1000}
                         {...tableProps}
                     >
-                        {columns.map(({ dataKey, justDesktop, ...other }, index) => {
+                        {columns.map(({ dataKey, justDesktop, label, ...other }, index) => {
                             if (justDesktop && window.innerWidth < 1000) return null
                             return (
                                 <Column
                                     key={dataKey}
                                     headerRenderer={this.headerCellRenderer}
-                                    cellRenderer={({ cellData }) => cellData}
+                                    cellRenderer={({ cellData }) => <><span>{label}</span><span>{cellData}</span></>}
                                     dataKey={dataKey}
                                     className={styles.tableCell}
                                     headerClassName={[styles.tableCell, styles.tableCellHeader].join(' ')}
                                     style={{ lineHeight: rowHeight + 'px' }}
+                                    label={label}
                                     {...other}
                                 />
                             )
