@@ -15,8 +15,8 @@ export const routes: (EntityRedirect | EntityRoute)[] = [
         url: '/welcome',
     },
     {
-        label: 'user overview',
-        url: '/user-overview',
+        label: 'users overview',
+        url: '/users-overview',
     },
 ]
 
