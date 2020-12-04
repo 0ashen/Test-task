@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import { App } from '../src/App/App'
+import { App } from '../../App/App'
 
 test('test render users overview page', () => {
     render(
