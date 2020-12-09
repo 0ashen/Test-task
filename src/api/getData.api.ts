@@ -6,6 +6,6 @@ function getData<T>(url: string, method: AxiosRequestConfig['method']): () => Ax
 }
 
 export const getUsers = getData<EntityUser[]>(
-    (process.env.NODE_ENV === 'production' ? '/Test-task-Benovate.ru' : '') + '/MOCK_DATA.json',
+    (process.env.NODE_ENV === 'production' ? '/Test-task' : '') + '/MOCK_DATA.json',
     'get',
 )

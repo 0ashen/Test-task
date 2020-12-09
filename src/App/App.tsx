@@ -44,7 +44,7 @@ function AppComponent(props: AppProps): JSX.Element {
             <a className={styles.githubLink}
                target="_blank"
                rel="noreferrer"
-               href="https://github.com/0ashen/Test-task-Benovate.ru">
+               href="https://github.com/0ashen/Test-task">
                 <GitHubIcon />
             </a>
         </>

@@ -7,7 +7,7 @@ import { EntityRoute } from '../../components/Navigation/Navigation.interface'
 
 test('test render users overview page', () => {
     render(
-        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task-Benovate.ru' : '/'}>
+        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task' : '/'}>
             <App redirectTo={(routes[2] as EntityRoute).url} />
         </BrowserRouter>,
     )

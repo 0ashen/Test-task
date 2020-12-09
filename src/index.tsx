@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task-Benovate.ru' : '/'} >
+        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task' : '/'} >
             <App />
         </BrowserRouter>
     </React.StrictMode>,

@@ -5,7 +5,7 @@ import { App } from '../../App/App'
 
 test('test render users overview page', () => {
     render(
-        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task-Benovate.ru' : '/'}>
+        <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/Test-task' : '/'}>
             <App />
         </BrowserRouter>,
     )

@@ -11,7 +11,7 @@ export function Welcome(): JSX.Element {
             }}>
                 Welcome to my test task!
             </h1>
-            <a href="https://github.com/0ashen/Test-task-Benovate.ru"
+            <a href="https://github.com/0ashen/Test-task"
                target="_blank"
                rel="noreferrer">
                 Go to <b>GITHUB</b>
